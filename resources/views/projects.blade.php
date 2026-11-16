@@ -87,7 +87,7 @@
                          onclick="window.location.href='{{ url('/projects/' . $project->slug) }}'">
                         <div class="portfolio-arrow-circle"><i class="fas fa-arrow-right"></i></div>
                         <div class="portfolio-img-wrap">
-                            <img src="{{ $project->featured_image ?? 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&auto=format&fit=crop&q=60' }}" alt="{{ $project->title }}">
+                            <img src="{{ $project->featured_image_url ??'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&auto=format&fit=crop&q=60' }}" alt="{{ $project->title }}">
                         </div>
                         <div class="portfolio-card-content">
                             <div class="portfolio-meta">

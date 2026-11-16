@@ -18,4 +18,10 @@ class ProjectImage extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+
+    public function getImageUrlAttribute(): ?string
+    {
+        return Project::imageUrl($this->image);
+    }
 }

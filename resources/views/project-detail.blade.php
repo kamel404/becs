@@ -101,11 +101,11 @@
                     @php
                         $allImages = [];
                         if ($project->featured_image) {
-                            $allImages[] = $project->featured_image;
+                            $allImages[] = $project->featured_image_url;
                         }
                         foreach ($project->images as $img) {
-                            if ($img->image !== $project->featured_image) {
-                                $allImages[] = $img->image;
+                            if ($img->image && $img->image !== $project->featured_image) {
+                                $allImages[] = $img->image_url;
                             }
                         }
                     @endphp

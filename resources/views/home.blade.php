@@ -328,7 +328,7 @@
                 @foreach($featuredProjects as $project)
                 <div class="project-card" id="proj-{{ $project->id }}" onclick="window.location.href='{{ url('/projects/' . $project->slug) }}'">
                     <div class="project-img-wrap">
-                        <img src="{{ $project->featured_image }}" alt="{{ $project->title }}">
+                        <img src="{{ $project->featured_image_url }}" alt="{{ $project->title }}">
                     </div>
                     <div class="project-card-content">
                         <div class="project-category">{{ $project->category?->name ?? 'Engineering' }}</div>
