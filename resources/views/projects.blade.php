@@ -95,7 +95,7 @@
                                 <span class="portfolio-meta-year">{{ $project->completion_date ? \Carbon\Carbon::parse($project->completion_date)->format('Y') : ($project->status === 'ongoing' ? 'In Progress' : 'N/A') }}</span>
                             </div>
                             <h3>{{ $project->title }}</h3>
-                            <p>{{ $project->short_description ?: $project->description }}</p>
+                            <p>{{ $project->short_description ?: \Illuminate\Support\Str::limit(html_entity_decode(strip_tags($project->description ?? '')), 160) }}</p>
                             <div class="portfolio-details-list">
                                 <div class="portfolio-details-item">
                                     <span>Location</span>

@@ -36,6 +36,12 @@
         .overview-section { margin-top: 3rem; }
         .overview-title { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 1.25rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.5rem; }
         .overview-description { font-size: 1.05rem; color: var(--color-text-secondary); line-height: 1.8; }
+        .overview-description p { margin-bottom: 1rem; }
+        .overview-description ul, .overview-description ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+        .overview-description ul { list-style: disc; }
+        .overview-description ol { list-style: decimal; }
+        .overview-description li { margin-bottom: 0.5rem; }
+        .overview-description a { color: var(--color-teal); text-decoration: underline; }
 
         /* Info Card Column */
         .info-sidebar { display: flex; flex-direction: column; gap: 2rem; position: sticky; top: 100px; }
@@ -120,9 +126,13 @@
                     <!-- Overview Section -->
                     <div class="overview-section">
                         <div class="overview-title">Project Overview</div>
-                        <p class="overview-description">
-                            {{ $project->description ?: 'No description provided for this project. Please contact our offices for technical specs and engineering details.' }}
-                        </p>
+                        <div class="overview-description">
+                            @if(filled(strip_tags($project->description ?? '')))
+                                {!! $project->description !!}
+                            @else
+                                <p>No description provided for this project. Please contact our offices for technical specs and engineering details.</p>
+                            @endif
+                        </div>
                     </div>
                 </div>
 
