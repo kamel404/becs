@@ -20,6 +20,14 @@ class ProjectImage extends Model
     }
 
 
+    protected static function booted(): void
+    {
+        static::deleted(function (ProjectImage $image) {
+            Project::deleteStoredFile($image->image);
+        });
+    }
+
+
     public function getImageUrlAttribute(): ?string
     {
         return Project::imageUrl($this->image);

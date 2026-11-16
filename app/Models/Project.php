@@ -50,7 +50,33 @@ class Project extends Model
 
     public function images(): HasMany
     {
-        return $this->hasMany(ProjectImage::class);
+        return $this->hasMany(ProjectImage::class)->orderBy('order')->orderBy('id');
+    }
+
+
+    protected static function booted(): void
+    {
+        // Delete gallery rows through Eloquent (not just the DB cascade) so their files are removed too.
+        static::deleting(function (Project $project) {
+            $project->images()->get()->each->delete();
+        });
+
+        static::deleted(function (Project $project) {
+            static::deleteStoredFile($project->featured_image);
+        });
+    }
+
+
+    /**
+     * Remove an uploaded file from the public disk. External URLs (seeded images) are ignored.
+     */
+    public static function deleteStoredFile(?string $path): void
+    {
+        if (blank($path) || preg_match('#^(https?:)?//#', $path) || str_starts_with($path, '/')) {
+            return;
+        }
+
+        \Illuminate\Support\Facades\Storage::disk('public')->delete($path);
     }
 
 
